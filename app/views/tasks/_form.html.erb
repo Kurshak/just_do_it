@@ -11,9 +11,13 @@
     </div>
   <% end %>
 
+
+
+  
+
   <div class="field">
-    <%= form.label : name %>
-    <%= form.text_field : name, id: :task_ name %>
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :task_name %>
   </div>
 
   <div class="field">
@@ -23,14 +27,9 @@
 
   <div class="field">
     <%= form.label :time %>
-    <%= form.text_field :time, id: :task_time %>
+    <%= form.datetime_select :time, id: :task_time %>
   </div>
-
-  <div class="field">
-    <%= form.label :complited %>
-    <%= form.text_field :complited, id: :task_complited %>
-  </div>
-
+  
   <div class="actions">
     <%= form.submit %>
   </div>

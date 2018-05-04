@@ -4,7 +4,8 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @user = current_user
+    @tasks = @user.tasks
   end
 
   # GET /tasks/1
@@ -24,16 +25,13 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = Task.new(task_params)
-
-    respond_to do |format|
-      if @task.save
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
-        format.json { render :show, status: :created, location: @task }
-      else
-        format.html { render :new }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
+    @task = current_user.tasks.build(task_params)
+       if @task.save
+      flash[:success] = "Created!"
+      redirect_to tasks_url
+    else
+      @feed_items = []
+      render 'static_pages/home'
     end
   end
 
@@ -71,4 +69,13 @@ class TasksController < ApplicationController
     def task_params
       params.require(:task).permit(:name, :description, :time, :complited)
     end
+    
+    def complit
+      @ltime=Time.now
+      if tasks.complited = nil
+          if @ltime > tasks.time 
+              tasks.all.complited = false 
+          end
+      end 
+  end   
 end

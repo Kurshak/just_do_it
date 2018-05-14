@@ -1,16 +1,20 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :complit]
 
   # GET /tasks
   # GET /tasks.json
   def index
+    
     @user = current_user
     @tasks = @user.tasks
+       #debugger
+    
   end
 
   # GET /tasks/1
   # GET /tasks/1.json
   def show
+    
   end
 
   # GET /tasks/new
@@ -26,13 +30,21 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = current_user.tasks.build(task_params)
-       if @task.save
-      flash[:success] = "Created!"
-      redirect_to tasks_url
-    else
-      @feed_items = []
-      render 'static_pages/home'
+    respond_to do |format|
+      if @task.save
+        format.html { redirect_to tasks_path, notice: 'Task was successfully created.' }
+      else
+        format.html { render :new }
+      end
     end
+  end
+
+  def complit
+   # debugger
+    @task.complit!
+
+    redirect_to tasks_path
+
   end
 
   # PATCH/PUT /tasks/1
@@ -70,12 +82,5 @@ class TasksController < ApplicationController
       params.require(:task).permit(:name, :description, :time, :complited)
     end
     
-    def complit
-      @ltime=Time.now
-      if tasks.complited = nil
-          if @ltime > tasks.time 
-              tasks.all.complited = false 
-          end
-      end 
-  end   
+   
 end

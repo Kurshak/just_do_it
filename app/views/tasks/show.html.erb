@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
-
-<p>
+<h1 class = "top">You Task</h1>
+<p >
   <strong>Name:</strong>
   <%= @task.name %>
 </p>
@@ -15,10 +15,7 @@
   <%= @task.time %>
 </p>
 
-<p>
-  <strong>Complited:</strong>
-  <%= @task.complited %>
-</p>
 
+ 
 <%= link_to 'Edit', edit_task_path(@task) %> |
 <%= link_to 'Back', tasks_path %>

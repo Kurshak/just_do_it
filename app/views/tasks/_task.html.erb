@@ -1,0 +1,9 @@
+<div  class = "task comleted_<%=task.complited%>">
+    <p>
+        <span class = "title"><%= task.name %></span>
+        <td><%= link_to content_tag('span', '', class: 'fa fa-book'), task , class:'action'%></td>
+        <td><%= link_to content_tag('span', '', class: 'fa fa-pencil'), edit_task_path(task), class:'action' %></td>
+        <td><%= link_to content_tag('span', '', class: 'fa fa-check'), {:controller => "tasks", :action => "complit", :id => task.id },  class: 'done action'%>
+        <td><%= link_to content_tag('span', '', class: 'fa fa-trash'), task, method: :delete, data: { confirm: 'Are you sure?' }, class:'action' %></td>
+    </p>
+</div>

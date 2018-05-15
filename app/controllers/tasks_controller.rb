@@ -5,10 +5,9 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    
     @user = current_user
     @tasks = @user.tasks
-       #debugger
+       #debugger  
     
   end
 
@@ -73,14 +72,16 @@ class TasksController < ApplicationController
   end
 
   private
+  # @task получает в себя задачу по id переданому ,current_user_id сравнить с user id  params ,да размуть
     # Use callbacks to share common setup or constraints between actions.
     def set_task
-      @task = Task.find(params[:id])
+      
+      @task = current_user.tasks.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:name, :description, :time, :complited)
+      params.require(:task).permit(:name, :description, :time, :user_id,:complited)
     end
     
    

@@ -13,12 +13,14 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
-    
+   
   end
 
   # GET /tasks/new
   def new
     @task = Task.new
+    
+    
   end
 
   # GET /tasks/1/edit

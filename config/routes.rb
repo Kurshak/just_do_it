@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
   devise_for :users
-  resources :users,   only: [:edit, :index, :show, :destroy]
+  
   resources :tasks
   get "complit" => "tasks#complit"
   root'static_page#home'

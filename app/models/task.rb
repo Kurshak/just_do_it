@@ -9,20 +9,7 @@ class Task < ApplicationRecord
        save :validate => false
     end
 
-    def fail!
-            if self.time < (Time.zone.now) and self.complited == nil
-                self.complited = false
-                save :validate => false
-            end
-    end   
-
-
-    def gre!
-        if self.time > (Time.zone.now) and self.complited == false
-            self.complited = nil
-            save :validate => false
-        end
-    end
+   
 
 
     private

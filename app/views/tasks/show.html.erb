@@ -1,21 +1,19 @@
 <p id="notice"><%= notice %></p>
 <h1 class = "top">You Task</h1>
-<p >
-  <strong>Name:</strong>
-  <%= @task.name %>
-</p>
+  <p >
+    <strong>Name:</strong>
+    <%= @task.name %>
+  </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @task.description %>
-</p>
+  <p>
+    <strong>Description:</strong>
+    <%= @task.description %>
+  </p>
 
-<p>
-  <strong>Time:</strong>
-  <%= @task.time %>
-</p>
-
-
- 
+  <p>
+    <strong>Time:</strong>
+    <%= @task.time %>
+  </p>
+  
 <%= link_to 'Edit', edit_task_path(@task) %> |
 <%= link_to 'Back', tasks_path %>

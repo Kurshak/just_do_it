@@ -7,13 +7,11 @@ class TasksController < ApplicationController
   def index
     @tasks = current_user.tasks
        #debugger  
-    
   end
 
   # GET /tasks/1
   # GET /tasks/1.json
-  def show
-   
+  def show  
   end
 
   # GET /tasks/new
@@ -41,9 +39,7 @@ class TasksController < ApplicationController
   def complit
    # debugger
     @task.complit!
-
     redirect_to tasks_path
-
   end
 
   # PATCH/PUT /tasks/1
@@ -74,7 +70,6 @@ class TasksController < ApplicationController
   # @task получает в себя задачу по id переданому ,current_user_id сравнить с user id  params ,да размуть
     # Use callbacks to share common setup or constraints between actions.
     def set_task
-      
       @task = current_user.tasks.find(params[:id])
     end
 
@@ -83,5 +78,4 @@ class TasksController < ApplicationController
       params.require(:task).permit(:name, :description, :time, :user_id,:complited)
     end
     
-   
 end

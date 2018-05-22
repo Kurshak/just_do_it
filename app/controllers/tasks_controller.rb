@@ -27,12 +27,10 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = current_user.tasks.build(task_params)
-    respond_to do |format|
-      if @task.save
-        format.html { redirect_to tasks_path, notice: 'Task was successfully created.' }
+      if @task.save 
+        redirect_to tasks_path , :notice => 'Task was successfully created.'
       else
-        format.html { render :new }
-      end
+        render 'new' 
     end
   end
 
@@ -45,26 +43,19 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
-    respond_to do |format|
-      if @task.update(task_params)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
-        format.json { render :show, status: :ok, location: @task }
-      else
-        format.html { render :edit }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
-    end
+    if @task.update(task_params)
+      redirect_to @task, :notice => 'Task was successfully updated.'   
+    else
+      render 'edit' 
+     end
   end
 
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
     @task.destroy
-    respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+    redirect_to tasks_url, :notice => 'Task was successfully destroyed.'
+   end
 
   private
   # @task получает в себя задачу по id переданому ,current_user_id сравнить с user id  params ,да размуть

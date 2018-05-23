@@ -5,8 +5,7 @@ class Task < ApplicationRecord
    validate  :valid_time 
    #теперь не опасный //потому что опасный 
     def complit!      
-       self.complited = true 
-       save :validate => false
+      update_attribute('complited', true)
     end
 
    def time?

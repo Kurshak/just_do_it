@@ -1,17 +1,24 @@
-<p id="notice"><%= notice %></p>
+
 <h1 class = "top">Tasks</h1>
-  <tbody >
+<div class="container-full">
+  <div class="row">
     <% @tasks.each do |task| %>
       <% if task.complited %>
-        <span class = "task comleted_true">   <%= render task %> </span>
+      <%#debugger%>
+        <div class = "task comleted_true">   <%= render task %> </div>
         <% else if task.time? %>
-          <span class = "task comleted_false">  <%= render task %> </span>
+          <div class = "task comleted_false">  <%= render task %> </div>
           <%else %>  
-            <span class = "task">  <%= render task %> </span>
+            <div class = "task">  <%= render task %> </div>
         <% end %>
       <% end %>
-  </tbody>
+     
+
   <% end %>
-</table>
+  </div>
+
 <br>
+<div>
 <%= link_to 'New Task', new_task_path , class: 'btn btn-primary'%>  
+</div>
+</div>

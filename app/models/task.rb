@@ -1,11 +1,21 @@
 class Task < ApplicationRecord
     belongs_to :user
+    belongs_to :task_list
     validates :name, :description, presence: true
-   
-   validate  :valid_time 
-   #теперь не опасный //потому что опасный 
+    validate  :valid_time 
+      STATUS =
+      [
+        ["today",0],
+        ["tomorrow",1],
+        ["later",2],
+        ["time_is_gone",3]
+      ]
+    enum status: [:today, :tomorrow, :later, :time_is_gone,:complited]
+   #теперь не опасный //потому что опасный //снова опасный
     def complit!      
-      update_attribute('complited', true)
+      self.complited!
+      self.time_complited = Time.zone.now
+      save!
     end
 
    def time?

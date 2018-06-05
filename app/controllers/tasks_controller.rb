@@ -1,12 +1,14 @@
 class TasksController < ApplicationController
   before_action :authenticate_user! 
   before_action :set_task, only: [:show, :edit, :update, :destroy, :complit]
+  before_action :set_task_list , except: [:complit,:show, :edit,:destroy,:update]
+
 
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = current_user.tasks
-       #debugger  
+   
+    @tasks = @task_list.tasks 
   end
 
   # GET /tasks/1
@@ -16,7 +18,8 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
-    @task = Task.new
+   
+    @task = @task_list.tasks.new
   end
 
   # GET /tasks/1/edit
@@ -26,9 +29,11 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    @task = current_user.tasks.build(task_params)
+    @task = current_user.tasks.build(task_params) 
+    @task.task_list_id = params[:task_list_id] 
+    
       if @task.save 
-        redirect_to tasks_path , notice: 'Task was successfully created.'
+        redirect_to task_list_tasks_path , notice: 'Task was successfully created.'
       else
         render 'new' 
     end
@@ -37,7 +42,7 @@ class TasksController < ApplicationController
   def complit
    # debugger
     @task.complit!
-    redirect_to tasks_path
+    redirect_to task_list_tasks_path(@task.task_list_id)
   end
 
   # PATCH/PUT /tasks/1
@@ -54,7 +59,7 @@ class TasksController < ApplicationController
   # DELETE /tasks/1.json
   def destroy
     @task.destroy
-    redirect_to tasks_url, notice: 'Task was successfully destroyed.'
+    redirect_to task_list_tasks_path(@task.task_list_id), notice: 'Task was successfully destroyed.'
    end
 
   private
@@ -64,9 +69,13 @@ class TasksController < ApplicationController
       @task = current_user.tasks.find(params[:id])
     end
 
+    def set_task_list
+      @task_list = TaskList.find(params[:task_list_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:name, :description, :time, :user_id,:complited)
+      params.require(:task).permit(:name, :description, :time,:complited)
     end
     
 end

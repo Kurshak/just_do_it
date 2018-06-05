@@ -1,32 +1,23 @@
-<%= form_with(model: task, local: true) do |form| %>
-  <% if task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+<%= simple_form_for([@task_list, @task]) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-      <ul>
-      <% task.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :task_name %>
+    <%= f.input :name %>
   </div>
 
   <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description, id: :task_description %>
+    <%= f.input :description %>
+  </div>
+  <div class="field">
+    <%= f.input :time %>
   </div>
 
   <div class="field">
-    <%= form.label :time %>
-    <%= form.datetime_select :time, id: :task_time %>
-  </div>
-  
-  <div class="actions">
-    <%= form.submit %>
+  <%= f.select :status , Task::STATUS %>
+</div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
   </div>
 <% end %>

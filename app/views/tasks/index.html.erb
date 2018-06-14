@@ -1,24 +1,10 @@
-
 <h1 class = "top">Tasks</h1>
-<div class="container-full">
-  <div class="row">
-    <% @tasks.each do |task| %>
-      <% if task.complited? %>
-      <%#debugger%>
-        <div class = "task comleted_true">   <%= render task %> </div>
-        <% else if task.time? %>
-          <div class = "task comleted_false">  <%= render task %> </div>
-          <%else %>  
-            <div class = "task">  <%= render task %> </div>
-        <% end %>
-      <% end %>
-     
-
-  <% end %>
-  </div>
-
-<br>
-<div>
-<%= link_to 'New Task',  new_task_list_task_path(@task_list.id) , class: 'btn btn-primary'%>  
+<div class="row">
+     <% @tasks.each do |task| %>
+          <div class = "task status_<%=task.status%>">  <%= render task %> </div>
+          <%#debugger%>
+     <% end %>
 </div>
+<div class="row">
+<%= link_to 'New Task',  new_task_list_task_path(@task_list.id) , class: 'btn btn-primary'%>  
 </div>

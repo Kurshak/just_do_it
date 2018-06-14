@@ -1,20 +1,17 @@
 class BoardsController < ApplicationController
   before_action :set_board, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /boards
   # GET /boards.json
   def index
     @boards = Board.all
-  end
+   end
 
   # GET /boards/1
   # GET /boards/1.json
   def show
-   
-   
-    
-    #debugger
-    end
+  end
 
   # GET /boards/new
   def new
@@ -29,29 +26,20 @@ class BoardsController < ApplicationController
   # POST /boards.json
   def create
     @board = current_user.boards.build(board_params)
-
-    respond_to do |format|
       if @board.save
-        format.html { redirect_to @board, notice: 'Board was successfully created.' }
-        format.json { render :show, status: :created, location: @board }
+        redirect_to boards_path , notice: 'Task was successfully created.'
       else
-        format.html { render :new }
-        format.json { render json: @board.errors, status: :unprocessable_entity }
+        render 'new'
       end
-    end
   end
 
   # PATCH/PUT /boards/1
   # PATCH/PUT /boards/1.json
-  def update
-    respond_to do |format|
+  def update    
       if @board.update(board_params)
-        format.html { redirect_to @board, notice: 'Board was successfully updated.' }
-        format.json { render :show, status: :ok, location: @board }
+        redirect_to @board, notice: 'Task was successfully updated.'
       else
-        format.html { render :edit }
-        format.json { render json: @board.errors, status: :unprocessable_entity }
-      end
+        render 'edit' 
     end
   end
 
@@ -59,10 +47,7 @@ class BoardsController < ApplicationController
   # DELETE /boards/1.json
   def destroy
     @board.destroy
-    respond_to do |format|
-      format.html { redirect_to boards_url, notice: 'Board was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to boards_path(@board.id), notice: 'Task was successfully destroyed.' 
   end
 
   private

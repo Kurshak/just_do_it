@@ -1,12 +1,11 @@
 class TaskListsController < ApplicationController
-  
+  before_action :authenticate_user!
 
   # GET /task_lists
   # GET /task_lists.json
   def index
     @board = Board.find(params[:board_id])
     @task_lists = @board.task_lists
-    
     #debugger
   end
 
@@ -27,16 +26,13 @@ class TaskListsController < ApplicationController
   
   # GET /task_lists/1/edit
   def edit
-  
     @task_list = TaskList.find(params[:id])
-    
 #debugger
   end
 
   # POST /task_lists
   # POST /task_lists.json
   def create
-  
     @task_list = current_user.task_lists.build(task_list_params) 
     @task_list.board_id = params[:board_id]
    # debugger

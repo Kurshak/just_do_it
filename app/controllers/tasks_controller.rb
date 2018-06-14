@@ -6,9 +6,10 @@ class TasksController < ApplicationController
 
   # GET /tasks
   # GET /tasks.json
-  def index
-   
-    @tasks = @task_list.tasks 
+  def index  
+    @tasks = @task_list.tasks.order("status")
+    
+    #debugger 
   end
 
   # GET /tasks/1
@@ -24,6 +25,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
+    
   end
 
   # POST /tasks
@@ -31,8 +33,10 @@ class TasksController < ApplicationController
   def create
     @task = current_user.tasks.build(task_params) 
     @task.task_list_id = params[:task_list_id] 
-    
-      if @task.save 
+          if @task.save      
+        @time = (@task.time - @task.created_at- 1.hour.seconds) 
+        #debugger
+        UserMailer.delay_for(@time).time_false_email(current_user,@task)
         redirect_to task_list_tasks_path , notice: 'Task was successfully created.'
       else
         render 'new' 
@@ -75,7 +79,7 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:name, :description, :time,:complited)
+      params.require(:task).permit(:name, :description, :time, :status)
     end
     
 end

@@ -1,0 +1,11 @@
+<div class="col-sm-6 col-md-3 col-xs-6">
+    <div class="panel panel-default">
+        <div  class="panel-heading"><%= task_list.name %></div>
+        <div class="panel-body"%></div>
+        <p>
+            <td><%= link_to content_tag('span', '', class: 'fa fa-book'), task_list_tasks_path(task_list)%></td>
+            <td><%= link_to content_tag('span', '', class: 'fa fa-pencil'),edit_task_list_path(task_list) %></td>
+            <td><%= link_to content_tag('span', '', class: 'fa fa-trash'), task_list, method: :delete, data: { confirm: 'Are you sure?' }, class:'action' %></td>
+        </p>       
+    </div>
+</div>

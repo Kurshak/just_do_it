@@ -1,17 +1,12 @@
 <div class="col-sm-6 col-md-3 col-xs-6">
-    <div class="thumbnail">
-        
-            <h2 class = "title"><%= task.name %></h2>
-                
-                        
-                        <span class = "title"><%= task.description %></span>
-                        <p>
-                            <td><%= link_to content_tag('span', '', class: 'fa fa-book'), task , class:'action'%></td>
-                            <td><%= link_to content_tag('span', '', class: 'fa fa-pencil'), edit_task_path(task), class:'action' %></td>
-                            <td><%= link_to content_tag('span', '', class: 'fa fa-check'), {:controller => "tasks", :action => "complit", :id => task.id },  class: 'done action'%>
-                            <td><%= link_to content_tag('span', '', class: 'fa fa-trash'), task, method: :delete, data: { confirm: 'Are you sure?' }, class:'action' %></td>
-                        </p>
-            
-        
+    <div class="panel panel-default">
+        <div  class="panel-heading"><%= task.name %></div>
+        <div class="panel-body"><%= task.description %></div>
+        <p>
+            <td><%= link_to content_tag('span', '', class: 'fa fa-book'), task , class:'action'%></td>
+            <td><%= link_to content_tag('span', '', class: 'fa fa-pencil'), edit_task_path(task), class:'action' %></td>
+            <td><%= link_to content_tag('span', '', class: 'fa fa-check'), {:controller => "tasks", :action => "complit", :id => task.id },  class: 'done action'%>
+            <td><%= link_to content_tag('span', '', class: 'fa fa-trash'), task, method: :delete, data: { confirm: 'Are you sure?' }, class:'action' %></td>
+        </p>       
     </div>
 </div>

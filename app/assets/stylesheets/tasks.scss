@@ -3,17 +3,21 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .task {
     margin-top: 2em;
+    
         .action {opacity: 0;}
         &:hover .action { 
             opacity: 1;
             transition: opacity 0.5s ease;
+
+            
         }
-
+        
 
 }
-.comleted_true {color: #339933; text-decoration: line-through}
-.comleted_false {color: #CC3300;}
-.done{
-    margin-left: 10px;
-}
-.comleted_true .done {display: none;}
+.status_complited {color: #339933;text-align: center;}
+.status_time_is_gone {color: #CC3300;text-align: center;}
+.status_today {color: #FF6600;text-align: center;}
+.status_tomorrow {color: #CCCC00;text-align: center;}
+.status_later {color: #6600CC;text-align: center;}
+
+.status_complited .done {display: none;}

@@ -5,17 +5,16 @@ class Task < ApplicationRecord
     validate  :valid_time 
       STATUS =
       [
-        ["today",0],
-        ["tomorrow",1],
-        ["later",2],
-        ["time_is_gone",3]
+        ["today"],
+        ["tomorrow"],
+        ["later"],
+        ["time_is_gone"]
       ]
-    enum status: [:today, :tomorrow, :later, :time_is_gone,:complited]
+    enum status: [:time_is_gone,:today, :tomorrow, :later, :complited]
    #теперь не опасный //потому что опасный //снова опасный
     def complit!      
-      self.complited!
-      self.time_complited = Time.zone.now
-      save!
+      update_attribute('status',"complited")
+      update_attribute('time_complited',Time.zone.now)      
     end
 
    def time?

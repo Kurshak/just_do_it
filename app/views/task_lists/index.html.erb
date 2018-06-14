@@ -1,28 +1,11 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Task Lists</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @task_lists.each do |task_list| %>
-      <tr>
-      <% #debugger %>
-        <td><%= task_list.name %></td>
-        <td><%= link_to 'Show',  task_list_tasks_path(task_list) %></td>
-        <td><%= link_to 'Edit', edit_task_list_path(task_list)%></td>
-        <td><%= link_to 'Destroy',task_list_path(task_list), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
+<h1 class = "top">Tasks Lists</h1>
+<div class="row">
+     <% @task_lists.each do |task_list| %>
+            <%= render task_list %> 
+      
+     <% end %>
+</div>
+<div class="row">
 <%= link_to 'New Task List', new_board_task_list_path(@board.id) %>
+</div>
+

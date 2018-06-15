@@ -4,7 +4,7 @@ class TaskListsController < ApplicationController
   # GET /task_lists
   # GET /task_lists.json
   def index
-    @board = Board.find(params[:board_id])
+    @board = current_user.boards.find(params[:board_id])
     @task_lists = @board.task_lists
     #debugger
   end

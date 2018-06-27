@@ -47,6 +47,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'rails-controller-testing'
   gem 'pry-rails'
+  gem 'figaro'
 end
 
 group :development ,:test do
